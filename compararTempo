@@ -1,0 +1,45 @@
+function gerarAleatorios1(num) {
+    var vetor = [];
+    console.time("TempoGastoAl1")
+    const startTime = performance.now()
+    
+    while (vetor.length < num) {
+        var aleatorio = Math.floor(Math.random() * 60 + 1)
+        if (!vetor.includes(aleatorio)) {
+            vetor.push(aleatorio)
+            console.log("gerarAleatorios1 adicionou:", aleatorio)
+        }
+    }
+    
+    console.timeEnd("TempoGastoAl1")
+    const endTime = performance.now()
+    return endTime - startTime
+}
+
+function gerarAleatorios2(num) {
+    const numeros = new Set()
+    console.time("TempoGastoAl2")
+    const startTime = performance.now()
+      
+    while (numeros.size < num) {
+        const aleatorio = Math.floor(Math.random() * 60 + 1)
+        if (!numeros.has(aleatorio)) {
+            numeros.add(aleatorio)
+            console.log("gerarAleatorios2 adicionou:", aleatorio)
+        }
+    }
+    
+    console.timeEnd("TempoGastoAl2")
+    const endTime = performance.now()
+    return endTime - startTime
+}
+
+function compararTempo(num) {
+    const tempo1 = gerarAleatorios1(num)
+    const tempo2 = gerarAleatorios2(num)
+    
+    const diferencaPercentual = ((tempo1 - tempo2) / tempo1) * 100;
+    
+    console.log(`gerarAleatorios2 é aproximadamente ${diferencaPercentual.toFixed(2)}% mais rápido que gerarAleatorios1.`)
+}
+compararTempo(10)
